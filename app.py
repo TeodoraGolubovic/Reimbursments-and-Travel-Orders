@@ -24,8 +24,8 @@ def get_session_id():
 def init_db():
     session_id = get_session_id()
     db_filename = f"troskovi_{session_id}.db"
-        conn = sqlite3.connect(db_filename)
-        c = conn.cursor()
+    conn = sqlite3.connect(db_filename)
+    c = conn.cursor()
     c.execute('''
         CREATE TABLE IF NOT EXISTS troskovi (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
