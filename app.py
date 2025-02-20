@@ -286,7 +286,7 @@ if st.button("Preuzmi PDF"):
                 for file_path in row["fajlovi"].split(","):
                     file_path = file_path.strip()
                     if file_path.endswith(".pdf"):
-			    merger.append(file_path)
+		            merger.append(file_path)
                     elif file_path.endswith((".jpg", ".jpeg", ".png")):
                         try:
                             img_hash = get_image_hash(file_path)
