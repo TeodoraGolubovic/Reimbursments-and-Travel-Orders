@@ -286,11 +286,11 @@ if st.button("Preuzmi PDF"):
                 for file_path in row["fajlovi"].split(","):
                     file_path = file_path.strip()
 
-                    if file_path.endswith((".jpg", ".jpeg", ".png")):
+                    if file_path.endswith((".pdf", ".jpg", ".jpeg", ".png")):
                         try:
                             img_hash = get_image_hash(file_path)
-                            if img_hash is None or img_hash in seen_hashes:
-                                continue  # Preskačemo ako ne može da se otvori ili ako je duplikat
+                            if img_hash is None:
+                                continue  # Preskačemo ako ne može da se otvori
 
                             seen_hashes.add(img_hash)
 
