@@ -67,7 +67,7 @@ with st.expander("📌 Kako koristiti aplikaciju? (Kliknite da vidite detalje)")
     3️⃣ Izaberite **kategoriju troška** iz padajućeg menija.  
     4️⃣ Unesite **iznos troška** u RSD.  
     5️⃣ **Obavezno dodajte račun** kao dokaz (PDF, JPG, PNG).  
-    6️⃣ Kliknite **"Dodaj trošak"** da biste sačuvali unos.  
+    6️⃣ Kliknite **"Dodaj trošak"** da biste sačuvali unos. Ponoviti proces dok se ne unesu svi troškovi.  
     7️⃣ Nakon unosa svih troškova, kliknite **"Preuzmi PDF"** da generišete izveštaj. Nakon toga, klikom na dugme **"Preuzmi PDF izveštaj"** čuvate izveštaj na svom računaru/mobilnom telefonu.
 
     ---
@@ -78,7 +78,7 @@ with st.expander("📌 Kako koristiti aplikaciju? (Kliknite da vidite detalje)")
     2️⃣ Unesite **datum i vreme kraja putovanja**.  
     3️⃣ Kliknite **"Obračunaj dnevnicu"**, aplikacija će izračunati iznos dnevnice.  
     4️⃣ Dnevnica će biti dodata u tabelu troškova i možete je uneti samo jednom. Ukoliko dođe do greške s unosom dnevnice, osvežiti aplikaciju i krenuti ispočetka.  
-    5️⃣ Kada završite unos troškova, kliknite **"Preuzmi PDF"** i aplikacija će generisati **putni nalog** sa datumima i dnevnicom.  Nakon toga, klikom na dugme **"Preuzmi PDF izveštaj"** čuvate izveštaj na svom računaru/mobilnom telefonu.  
+    5️⃣ Kada završite unos dodatnih troškova, kliknite **"Preuzmi PDF"** i aplikacija će generisati **putni nalog** sa datumima i dnevnicom.  Nakon toga, klikom na dugme **"Preuzmi PDF izveštaj"** čuvate izveštaj na svom računaru/mobilnom telefonu.  
     
     **📌 Napomena:** I za putni nalog i za refundaciju OBAVEZNO uneti ime podnosioca zahteva, kao i ime osobe koja je odobrila zahtev.
 
