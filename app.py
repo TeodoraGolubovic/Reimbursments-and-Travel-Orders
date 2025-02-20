@@ -80,7 +80,7 @@ with st.expander("📌 Kako koristiti aplikaciju? (Kliknite da vidite detalje)")
     4️⃣ Dnevnica će biti dodata u tabelu troškova i možete je uneti samo jednom. Ukoliko dođe do greške s unosom dnevnice, osvežiti aplikaciju i krenuti ispočetka.  
     5️⃣ Kada završite unos troškova, kliknite **"Preuzmi PDF"** i aplikacija će generisati **putni nalog** sa datumima i dnevnicom.  
     
-    **📌 Napomena:** Obavezno unesite svoje ime i ime osobe koja je odobrila putni nalog/refundaciju.
+    **📌 Napomena:** Ako ste dodali dnevnicu, u PDF-u će biti naznačeno da je u pitanju PUTNI NALOG, a ne obična refundacija.
 
     """)
 
@@ -100,43 +100,40 @@ if st.session_state.app_started:
     vreme_kraja = st.time_input("Vreme kraja putovanja")
     
     if st.button("Obračunaj dnevnicu"):
-	    if not odobrio or not uploaded_file:
-            st.warning("Morate uneti svoje ime i ime osobe koja je odobrila putni nalog.")
-	    else:
-            pocetak_datetime = datetime.datetime.combine(pocetak, vreme_pocetka)
-            kraj_datetime = datetime.datetime.combine(kraj, vreme_kraja)
-            trajanje = (kraj_datetime - pocetak_datetime).total_seconds() / 3600  # Trajanje u satima
+        pocetak_datetime = datetime.datetime.combine(pocetak, vreme_pocetka)
+        kraj_datetime = datetime.datetime.combine(kraj, vreme_kraja)
+        trajanje = (kraj_datetime - pocetak_datetime).total_seconds() / 3600  # Trajanje u satima
         
-            pune_dnevnice = int(trajanje // 24) * 3012
-            preostali_sati = trajanje % 24
+        pune_dnevnice = int(trajanje // 24) * 3012
+        preostali_sati = trajanje % 24
         
-            if preostali_sati < 8:
-                dodatna_dnevnica = 0
-            elif preostali_sati < 12:
-                dodatna_dnevnica = 1506
-            else:
-                dodatna_dnevnica = 3012
+        if preostali_sati < 8:
+            dodatna_dnevnica = 0
+        elif preostali_sati < 12:
+            dodatna_dnevnica = 1506
+        else:
+            dodatna_dnevnica = 3012
         
-            ukupna_dnevnica = pune_dnevnice + dodatna_dnevnica
+        ukupna_dnevnica = pune_dnevnice + dodatna_dnevnica
         
-            if not st.session_state.dnevnica_dodata:
-                conn = sqlite3.connect(DB_FILE)
-                c = conn.cursor()
-                c.execute(
-                    "INSERT INTO troskovi (ime, odobrio, kategorija, iznos, valuta, fajlovi) VALUES (?, ?, ?, ?, ?, ?)",
-                    ("", "", "Dnevnica (52902)", ukupna_dnevnica, "RSD", "")
-                )
-                conn.commit()
-                conn.close()
-                st.session_state.dnevnica_dodata = True  # Obeleži da je dnevnica dodata
+        if not st.session_state.dnevnica_dodata:
+            conn = sqlite3.connect(DB_FILE)
+            c = conn.cursor()
+            c.execute(
+                "INSERT INTO troskovi (ime, odobrio, kategorija, iznos, valuta, fajlovi) VALUES (?, ?, ?, ?, ?, ?)",
+                ("", "", "Dnevnica (52902)", ukupna_dnevnica, "RSD", "")
+            )
+            conn.commit()
+            conn.close()
+            st.session_state.dnevnica_dodata = True  # Obeleži da je dnevnica dodata
         
         
 	   # Osvežavanje podataka nakon dodavanja dnevnice
-            df_conn = sqlite3.connect(DB_FILE)
-            st.session_state.troskovi = pd.read_sql_query("SELECT id, kategorija, iznos as 'Ukupno Iznos', fajlovi FROM troskovi", df_conn)
-            df_conn.close()
+        df_conn = sqlite3.connect(DB_FILE)
+        st.session_state.troskovi = pd.read_sql_query("SELECT id, kategorija, iznos as 'Ukupno Iznos', fajlovi FROM troskovi", df_conn)
+        df_conn.close()
 	
-            st.rerun()  # Osveži aplikaciju da prikaže ažurirane podatke
+        st.rerun()  # Osveži aplikaciju da prikaže ažurirane podatke
         
 
         
@@ -169,7 +166,7 @@ if st.session_state.app_started:
     # Dodavanje troška
     if st.button("Dodaj trošak"):
         if not odobrio or not uploaded_file:
-            st.warning("Morate uneti osobu koja je odobrila trošak i dodati račun.")
+            st.warning("Morate uneti osobu koja je odobrila i dodati račun.")
         else:
             file_path = os.path.join("uploads", uploaded_file.name)
             os.makedirs("uploads", exist_ok=True)
