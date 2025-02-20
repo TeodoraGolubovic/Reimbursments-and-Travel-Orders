@@ -10,6 +10,20 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import datetime
 import uuid
+import glob
+import time
+
+def obrisi_stare_baze(dani = 3):
+    trenutni_timestamp = time.time()
+    baza_fajlovi = glob.glob("troskovi_*.db")
+    for baza in baza_fajlovi:
+        if os.path.exists(baza):
+            vreme_modifikacije = os.path.getmtime(baza)
+            starost_dana = (trenutni_timestamp - vreme_modifikacije) / 86400
+            if starost_dana > dani:
+                os.remove(baza)
+                print(f"Baza {baza} je obrisana")
+obrisi_stare_baze(dani=3)
 
 # Konfiguracija stranice
 st.set_page_config(page_title="Obračun dnevnice i refundacija", layout="wide")
