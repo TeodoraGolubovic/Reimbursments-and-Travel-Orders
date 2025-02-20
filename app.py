@@ -9,16 +9,23 @@ from PyPDF2 import PdfMerger
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import datetime
+import uuid
 
 # Konfiguracija stranice
 st.set_page_config(page_title="Obračun dnevnice i refundacija", layout="wide")
 
-# Konekcija sa SQLite bazom
-DB_FILE = "troskovi.db"
+def get_session_id():
+	if 'session_id' not in st.session_state:
+		st.session_state['session_id'] = str(uuid.uuid4())
+	return st.session_state['session_id']
+
+
 
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
-    c = conn.cursor()
+    session_id = get_session_id()
+    db_filename = f"troskovi_{session_id}.db"
+	conn = sqlite3.connect(db_filename)
+        c = conn.cursor()
     c.execute('''
         CREATE TABLE IF NOT EXISTS troskovi (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +39,7 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+    return db_filename
 
 def reset_db():
     conn = sqlite3.connect(DB_FILE)
@@ -43,7 +51,8 @@ def reset_db():
     st.session_state.app_started = True
     st.session_state.dnevnica_dodata = False  # Dodato da spreči dupliranje dnevnice
 
-init_db()
+# Konekcija sa SQLite bazom
+DB_FILE = init_db()
 
 # Inicijalizacija sesije
 if "app_started" not in st.session_state:
