@@ -77,7 +77,7 @@ with st.expander("📌 Kako koristiti aplikaciju? (Kliknite da vidite detalje)")
     1️⃣ Unesite **datum i vreme početka putovanja**.  
     2️⃣ Unesite **datum i vreme kraja putovanja**.  
     3️⃣ Kliknite **"Obračunaj dnevnicu"**, aplikacija će izračunati iznos dnevnice.  
-    4️⃣ Dnevnica će biti dodata u tabelu troškova.  
+    4️⃣ Dnevnica će biti dodata u tabelu troškova i možete je uneti samo jednom. Ukoliko dođe do greške s unosom dnevnice, osvežiti aplikaciju i krenuti ispočetka.  
     5️⃣ Kada završite unos troškova, kliknite **"Preuzmi PDF"** i aplikacija će generisati **putni nalog** sa datumima i dnevnicom.  
     
     **📌 Napomena:** Ako ste dodali dnevnicu, u PDF-u će biti naznačeno da je u pitanju PUTNI NALOG, a ne obična refundacija.
