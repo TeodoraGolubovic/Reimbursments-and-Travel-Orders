@@ -22,7 +22,7 @@ def obrisi_stare_baze(dani = 3):
             starost_dana = (trenutni_timestamp - vreme_modifikacije) / 86400
             if starost_dana > dani:
                 os.remove(baza)
-                print(f"Baza {baza} je obrisana")
+                
 obrisi_stare_baze(dani=3)
 
 # Konfiguracija stranice
