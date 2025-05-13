@@ -260,7 +260,7 @@ if st.button("Preuzmi PDF"):
     if df.empty:
         st.warning("Nema podataka za izveštaj.")
     else:
-	os.makedirs("uploads", exist_ok=True)
+        os.makedirs("uploads", exist_ok=True)
         pdf_path = f"uploads/izvestaj_{datetime.date.today()}.pdf"
 
         # Provera da li postoji dnevnica u tabeli
