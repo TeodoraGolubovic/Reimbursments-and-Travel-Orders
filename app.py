@@ -256,7 +256,7 @@ def get_image_hash(image_path):
     except:
         return None  # Ako postoji greska, preskoci sliku
 
-if st.button("Preuzmi PDF"):
+if st.button("Kreiraj PDF"):
     if df.empty:
         st.warning("Nema podataka za izveštaj.")
     else:
